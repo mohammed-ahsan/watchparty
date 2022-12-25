@@ -1,2 +1,2 @@
 # Watch Party
-#### A simple self-hosting NodeJS web-app to stream and controll large videos with multiple viewers.  
+#### A simple self-hosting NodeJS web-app to stream and control large videos with multiple viewers.  
