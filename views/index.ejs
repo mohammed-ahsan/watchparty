@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <title>Watch Party</title>
+</head>
+
+<body>
+    <video id="video" width="50%" controls muted="muted" autoplay>
+        <source src="/video" type="video/mp4" />
+        <track label="English" kind="subtitles" srclang="en" src="/tracks/Love Actually.srt" default />
+    </video>
+
+    <button id="seek">
+        Seek
+    </button>
+
+    <button id="pause">
+        Pause
+    </button>
+
+    <button id="play">
+        Play
+    </button>
+
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"
+        integrity="sha384-/KNQL8Nu5gCHLqwqfQjA689Hhoqgi2S84SNUxC3roTe4EhJ9AfLkp8QiQcU8AMzI"
+        crossorigin="anonymous"></script>
+
+    <script src="./app.js" defer></script>
+</body>
+
+</html>
