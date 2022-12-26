@@ -5,20 +5,10 @@ const video = document.getElementById("video");
 
 const btn = document.getElementById("seek");
 const pause = document.getElementById("pause");
-const pause_btn = document.getElementById ("pause_btn");
+const pause_btn = document.getElementById("pause_btn");
 const play_btn = document.getElementById("play_btn");
 
 
-
-// driver method
-const main = (e)=>{
-    switchPausePlay ()
-}
-
-
-
-
-window.addEventListener ("load", main);
 
 
 // Event Listeners
@@ -28,15 +18,25 @@ btn.addEventListener("click", (event) => {
 
 pause.addEventListener("click", (e) => {
     if (!video.paused) {
-    onPause(video, socket)
+        onPause(video, socket)
 
     } else {
-        onPlay (video);
+        onPlay(video);
     }
 });
 
-play.addEventListener("click", e => onPlay(video));
+document.addEventListener("keydown", (e) => {
+    e = e || window.event;
+    if (e.key === "ArrowLeft") {
+        horizontal_arrow_press(false, socket);
+    }
+    else if (e.key === "ArrowRight") {
+        horizontal_arrow_press(true, socket); 
+        console.log ("right")
+    }
 
+
+})
 
 // Socket Listeners
 socket.on("move", (time) => onMove(time, video))
@@ -64,16 +64,16 @@ const onMove = (time, video) => {
 
 const onPause = (video, socket) => {
     video.pause();
-    switchPausePlay (false);
+    switchPausePlay(false);
     socket.emit("pause");
 }
 
 const onPlay = (video) => {
     video.play();
-    switchPausePlay ();
+    switchPausePlay();
 }
 
-const switchPausePlay = (flag=true)=>{
+const switchPausePlay = (flag = true) => {
     if (flag) {
         pause_btn.style.display = "inline-block";
         play_btn.style.display = "none";
@@ -82,3 +82,21 @@ const switchPausePlay = (flag=true)=>{
         play_btn.style.display = "inline-block";
     }
 }
+
+const horizontal_arrow_press = (forward = true, socket) => {
+    if (forward) {
+        socket.emit("seek_forward")
+    } else {
+        socket.emit("seek_backward")
+    }
+
+}
+
+
+// driver method
+const main = (e) => {
+    switchPausePlay()
+}
+
+
+window.addEventListener("load", main);

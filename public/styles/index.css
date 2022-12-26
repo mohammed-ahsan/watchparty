@@ -1,0 +1,44 @@
+body {
+    overflow-x: hidden;
+    min-height: 100vw;
+    width: 100vw;
+    background-color: #131516;
+    color: whitesmoke;
+}
+
+nav {
+    width: 100vw;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+nav h1 {
+    font-size: 1.5rem;
+}
+
+.video {
+    width: 100vw;
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+video {
+    width: 75%;
+    height: auto;
+}
+
+
+.material-symbols-outlined {
+    color: teal;
+    font-size: 50px;
+    cursor: pointer;
+}
+
+.material-symbols-outlined:active {
+    scale: 0.9;
+}
