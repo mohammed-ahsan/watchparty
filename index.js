@@ -39,7 +39,7 @@ app.get("/", (req, res) => {
 
 
 
-io.on('connection', socketEvents);
+io.on('connection', (socket)=>socketEvents (io, socket));
 
 
 // Controllers 

@@ -20,18 +20,16 @@ nav h1 {
 
 .video {
     width: 100vw;
-    padding: 10px;
-    margin: 10px;
+    padding: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 video {
-    width: 75%;
+    width: 90%;
     height: auto;
 }
-
 
 .material-symbols-outlined {
     color: teal;
@@ -41,4 +39,15 @@ video {
 
 .material-symbols-outlined:active {
     scale: 0.9;
+}
+
+@media (min-width: 1500px) {
+    .video {
+        padding: 10px;
+        margin: 10px;
+    }
+
+    video {
+        width: 75%;
+    }
 }

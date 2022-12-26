@@ -17,13 +17,12 @@ btn.addEventListener("click", (event) => {
 });
 
 pause.addEventListener("click", (e) => {
-    if (!video.paused) {
-        onPause(video, socket)
-
-    } else {
-        onPlay(video);
-    }
+    pause_play_controll (video, socket)
 });
+
+video.addEventListener("click", ()=>{
+    pause_play_controll (video, socket)
+})
 
 document.addEventListener("keydown", (e) => {
     e = e || window.event;
@@ -32,7 +31,9 @@ document.addEventListener("keydown", (e) => {
     }
     else if (e.key === "ArrowRight") {
         horizontal_arrow_press(true, socket); 
-        console.log ("right")
+    } 
+    else if (e.key === " ") {
+        pause_play_controll (video, socket)
     }
 
 
@@ -40,7 +41,8 @@ document.addEventListener("keydown", (e) => {
 
 // Socket Listeners
 socket.on("move", (time) => onMove(time, video))
-socket.on("paused", () => video.pause());
+socket.on("paused", () => pause_play (video));
+socket.on("seeking_forward", time=>seeking_forward(time, video))
 
 
 
@@ -62,16 +64,6 @@ const onMove = (time, video) => {
     //  onPause (video, socket);
 }
 
-const onPause = (video, socket) => {
-    video.pause();
-    switchPausePlay(false);
-    socket.emit("pause");
-}
-
-const onPlay = (video) => {
-    video.play();
-    switchPausePlay();
-}
 
 const switchPausePlay = (flag = true) => {
     if (flag) {
@@ -85,13 +77,40 @@ const switchPausePlay = (flag = true) => {
 
 const horizontal_arrow_press = (forward = true, socket) => {
     if (forward) {
-        socket.emit("seek_forward")
+        socket.emit("seek_forward", forward)
     } else {
-        socket.emit("seek_backward")
+        socket.emit("seek_forward", forward)
     }
 
 }
 
+
+const pause_play_controll = (video, socket)=>{
+    pause_play (video);
+    socket.emit("pause");
+}
+
+
+const pause_play = (video)=>{
+    if (!video.paused) {
+        video.pause ()
+        switchPausePlay(false);
+
+    } else {
+        video.play ();
+        switchPausePlay();
+    }
+}
+
+const seeking_forward = (time, video)=>{
+    timestamp = video.currentTime + time; 
+
+    if (timestamp<0) {
+        video.currentTime = 0;
+    } else {
+        video.currentTime = timestamp;
+    }
+}
 
 // driver method
 const main = (e) => {
