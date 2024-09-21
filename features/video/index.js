@@ -9,7 +9,7 @@ app.get("/", async (req, res) => {
     if (!range) {
         res.status(400).send("Requires Range header");
     }
-    const videoPath = `./movies/${process.env.MOVIE_NAME}`;
+    const videoPath = `video.mp4`;
     const videoSize = fs.statSync(videoPath).size;
 
     const CHUNK_SIZE = 10 ** 6;
